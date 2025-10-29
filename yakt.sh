@@ -1,6 +1,6 @@
 #!/system/bin/sh
 
-# YAKT v302
+# YAKT v303
 # Author: @NotZeetaa (Github)
 # ×××××××××××××××××××××××××× #
 
@@ -79,7 +79,7 @@ ANDROID_VERSION=$(getprop ro.build.version.release)
 TOTAL_RAM=$(free -m | awk '/Mem/{print $2}')
 
 # Log starting information
-log_info "Starting YAKT v302"
+log_info "Starting YAKT v303"
 log_info "Build Date: 06/06/2024"
 log_info "Author: @NotZeetaa (Github)"
 log_info "Device: $(getprop ro.product.system.model)"
@@ -231,12 +231,12 @@ write_value "/sys/kernel/mm/ksm/run" 0
 write_value "/sys/kernel/mm/transparent_hugepage/enabled" never
 
 write_value "/proc/sys/vm/swappiness" 10
-for zram_dev in zram0 zram1 zram
-do
-  write_value "/sys/block/$zram_dev/comp_algorithm" lz4
-  write_value "/sys/block/$zram_dev/disksize" 2G
-  write_value "/sys/block/$zram_dev/mem_limit" 0
-done
+#for zram_dev in zram0 zram1 zram
+#do
+#  write_value "/sys/block/$zram_dev/comp_algorithm" lz4
+#  write_value "/sys/block/$zram_dev/disksize" 2G
+#  write_value "/sys/block/$zram_dev/mem_limit" 0
+#done
 
 write_value "/proc/sys/vm/page-cluster" 0
 
@@ -250,7 +250,7 @@ write_value "/proc/sys/kernel/sched_tunable_scaling" 0
 write_value "/proc/sys/kernel/sched_migration_cost_ns" 5000000
 write_value "/proc/sys/kernel/sched_min_granularity_ns" 10000000
 write_value "/proc/sys/kernel/sched_wakeup_granularity_ns" 5000000
-write_value "/sys/kernel/debug/sched_features" GENTLE_FAIR_SLEEPERS NEXT_BUDDY TTWU_QUEUE START_DEBIT
+#write_value "/sys/kernel/debug/sched_features" GENTLE_FAIR_SLEEPERS NEXT_BUDDY TTWU_QUEUE START_DEBIT
 write_value "/dev/stune/top-app/schedtune.prefer_idle" 0
 write_value "/dev/stune/top-app/schedtune.boost" 90
 write_value "/sys/module/mmc_core/parameters/use_spi_crc" 0
