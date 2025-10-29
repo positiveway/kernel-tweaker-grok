@@ -1,6 +1,6 @@
 #!/system/bin/sh
 
-# YAKT v301
+# YAKT v302
 # Author: @NotZeetaa (Github)
 # ×××××××××××××××××××××××××× #
 
@@ -79,7 +79,7 @@ ANDROID_VERSION=$(getprop ro.build.version.release)
 TOTAL_RAM=$(free -m | awk '/Mem/{print $2}')
 
 # Log starting information
-log_info "Starting YAKT v301"
+log_info "Starting YAKT v302"
 log_info "Build Date: 06/06/2024"
 log_info "Author: @NotZeetaa (Github)"
 log_info "Device: $(getprop ro.product.system.model)"
@@ -215,12 +215,12 @@ write_value "/proc/sys/vm/dirty_expire_centisecs" 500
 write_value "/proc/sys/vm/dirty_writeback_centisecs" 200
 
 write_value "/proc/sys/kernel/sched_autogroup_enabled" 0
-write_value "/proc/sys/vm/stat_interval" 120
+write_value "/proc/sys/vm/stat_interval" 30
 
 write_value "/proc/sys/vm/vfs_cache_pressure" 50
 write_value "/proc/sys/vm/compaction_proactiveness" 0
-write_value "/proc/sys/vm/page_lock_unfairness" 1
-write_value "/proc/sys/vm/watermark_boost_factor" 5000
+write_value "/proc/sys/vm/page_lock_unfairness" 5
+write_value "/proc/sys/vm/watermark_boost_factor" 0
 write_value "/proc/sys/vm/watermark_scale_factor" 5
 
 write_value "/sys/kernel/mm/lru_gen/enabled" 0x7
@@ -231,9 +231,12 @@ write_value "/sys/kernel/mm/ksm/run" 0
 write_value "/sys/kernel/mm/transparent_hugepage/enabled" never
 
 write_value "/proc/sys/vm/swappiness" 10
-write_value "/sys/block/zram0/comp_algorithm" lz4
-write_value "/sys/block/zram0/disksize" 4G
-write_value "/sys/block/zram0/mem_limit" 4G
+for zram_dev in zram0 zram1 zram
+do
+  write_value "/sys/block/$zram_dev/comp_algorithm" lz4
+  write_value "/sys/block/$zram_dev/disksize" 2G
+  write_value "/sys/block/$zram_dev/mem_limit" 0
+done
 
 write_value "/proc/sys/vm/page-cluster" 0
 
@@ -246,29 +249,25 @@ write_value "/proc/sys/kernel/sched_min_task_util_for_colocation" 0
 write_value "/proc/sys/kernel/sched_tunable_scaling" 0
 write_value "/proc/sys/kernel/sched_migration_cost_ns" 5000000
 write_value "/proc/sys/kernel/sched_min_granularity_ns" 10000000
-write_value "/proc/sys/kernel/sched_wakeup_granularity_ns" 2000000
-write_value "/sys/kernel/debug/sched_features" GENTLE_FAIR_SLEEPERS
-write_value "/sys/kernel/debug/sched_features" NEXT_BUDDY
-write_value "/sys/kernel/debug/sched_features" TTWU_QUEUE
-write_value "/sys/kernel/debug/sched_features" START_DEBIT
-write_value "/dev/stune/top-app/schedtune.prefer_idle" 1
-write_value "/dev/stune/top-app/schedtune.boost" 15
+write_value "/proc/sys/kernel/sched_wakeup_granularity_ns" 5000000
+write_value "/sys/kernel/debug/sched_features" GENTLE_FAIR_SLEEPERS NEXT_BUDDY TTWU_QUEUE START_DEBIT
+write_value "/dev/stune/top-app/schedtune.prefer_idle" 0
+write_value "/dev/stune/top-app/schedtune.boost" 90
 write_value "/sys/module/mmc_core/parameters/use_spi_crc" 0
 write_value "/sys/module/workqueue/parameters/power_efficient" 0
-write_value "/proc/sys/net/ipv4/tcp_ecn" 1
+# Disable watchdog
+write_value "/sys/module/workqueue/parameters/watchdog_thresh" 0
+write_value "/proc/sys/net/ipv4/tcp_ecn" 0
 write_value "/proc/sys/net/ipv4/tcp_fastopen" 3
 write_value "/proc/sys/net/ipv4/tcp_syncookies" 0
 write_value "/proc/sys/net/ipv4/tcp_low_latency" 1
-write_value "/proc/sys/net/ipv4/tcp_timestamps" 0
+write_value "/proc/sys/net/ipv4/tcp_timestamps" 1
 write_value "/proc/sys/net/ipv4/tcp_slow_start_after_idle" 0
+write_value "/proc/sys/net/ipv4/tcp_congestion_control" bbr
 #
+write_value "/proc/sys/net/ipv4/tcp_window_scaling" 1
 write_value "/proc/sys/net/ipv4/tcp_no_metrics_save" 1
 write_value "/proc/sys/net/ipv4/tcp_tw_reuse" 1
-write_value "/proc/sys/net/ipv4/tcp_window_scaling" 1
-write_value "/proc/sys/net/ipv4/tcp_congestion_control" bbr
-# Disable watchdog
-write_value "/sys/module/workqueue/parameters/watchdog_thresh" 0
-
 
 #IF
 #if [ -e "/proc/sys/kernel/sched_schedstats" ]; then
