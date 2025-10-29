@@ -1,6 +1,6 @@
 #!/system/bin/sh
 
-# YAKT v303
+# YAKT v304
 # Author: @NotZeetaa (Github)
 # ×××××××××××××××××××××××××× #
 
@@ -79,7 +79,7 @@ ANDROID_VERSION=$(getprop ro.build.version.release)
 TOTAL_RAM=$(free -m | awk '/Mem/{print $2}')
 
 # Log starting information
-log_info "Starting YAKT v303"
+log_info "Starting YAKT v304"
 log_info "Build Date: 06/06/2024"
 log_info "Author: @NotZeetaa (Github)"
 log_info "Device: $(getprop ro.product.system.model)"
@@ -256,13 +256,13 @@ write_value "/proc/sys/net/ipv4/tcp_ecn" 0
 write_value "/proc/sys/net/ipv4/tcp_fastopen" 3
 write_value "/proc/sys/net/ipv4/tcp_syncookies" 0
 write_value "/proc/sys/net/ipv4/tcp_low_latency" 1
-write_value "/proc/sys/net/ipv4/tcp_timestamps" 1
+write_value "/proc/sys/net/ipv4/tcp_timestamps" 0
 write_value "/proc/sys/net/ipv4/tcp_slow_start_after_idle" 0
-write_value "/proc/sys/net/ipv4/tcp_congestion_control" bbr
 #
-write_value "/proc/sys/net/ipv4/tcp_window_scaling" 1
-write_value "/proc/sys/net/ipv4/tcp_no_metrics_save" 1
-write_value "/proc/sys/net/ipv4/tcp_tw_reuse" 1
+#write_value "/proc/sys/net/ipv4/tcp_congestion_control" bbr
+#write_value "/proc/sys/net/ipv4/tcp_window_scaling" 1
+#write_value "/proc/sys/net/ipv4/tcp_no_metrics_save" 1
+#write_value "/proc/sys/net/ipv4/tcp_tw_reuse" 1
 #
 write_value "/proc/sys/vm/dirty_background_ratio" 5
 write_value "/proc/sys/vm/dirty_ratio" 10
