@@ -209,11 +209,6 @@ do
 done
 
 # My tweak
-write_value "/proc/sys/vm/dirty_background_ratio" 5
-write_value "/proc/sys/vm/dirty_ratio" 10
-write_value "/proc/sys/vm/dirty_expire_centisecs" 500
-write_value "/proc/sys/vm/dirty_writeback_centisecs" 200
-
 write_value "/proc/sys/kernel/sched_autogroup_enabled" 0
 write_value "/proc/sys/vm/stat_interval" 30
 
@@ -268,6 +263,12 @@ write_value "/proc/sys/net/ipv4/tcp_congestion_control" bbr
 write_value "/proc/sys/net/ipv4/tcp_window_scaling" 1
 write_value "/proc/sys/net/ipv4/tcp_no_metrics_save" 1
 write_value "/proc/sys/net/ipv4/tcp_tw_reuse" 1
+#
+write_value "/proc/sys/vm/dirty_background_ratio" 5
+write_value "/proc/sys/vm/dirty_ratio" 10
+write_value "/proc/sys/vm/dirty_expire_centisecs" 500
+write_value "/proc/sys/vm/dirty_writeback_centisecs" 200
+#
 
 #IF
 #if [ -e "/proc/sys/kernel/sched_schedstats" ]; then
