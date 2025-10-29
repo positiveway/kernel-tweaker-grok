@@ -245,7 +245,7 @@ write_value "/proc/sys/kernel/sched_tunable_scaling" 0
 write_value "/proc/sys/kernel/sched_migration_cost_ns" 5000000
 write_value "/proc/sys/kernel/sched_min_granularity_ns" 10000000
 write_value "/proc/sys/kernel/sched_wakeup_granularity_ns" 5000000
-#write_value "/sys/kernel/debug/sched_features" GENTLE_FAIR_SLEEPERS NEXT_BUDDY TTWU_QUEUE START_DEBIT
+write_value "/sys/kernel/debug/sched_features" GENTLE_FAIR_SLEEPERS NEXT_BUDDY TTWU_QUEUE START_DEBIT
 write_value "/dev/stune/top-app/schedtune.prefer_idle" 0
 write_value "/dev/stune/top-app/schedtune.boost" 90
 write_value "/sys/module/mmc_core/parameters/use_spi_crc" 0
