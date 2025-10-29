@@ -255,14 +255,15 @@ write_value "/dev/stune/top-app/schedtune.prefer_idle" 1
 write_value "/dev/stune/top-app/schedtune.boost" 15
 write_value "/sys/module/mmc_core/parameters/use_spi_crc" 0
 write_value "/sys/module/workqueue/parameters/power_efficient" 0
-write_value "/proc/sys/net/ipv4/tcp_tw_reuse" 1
 write_value "/proc/sys/net/ipv4/tcp_ecn" 1
 write_value "/proc/sys/net/ipv4/tcp_fastopen" 3
 write_value "/proc/sys/net/ipv4/tcp_syncookies" 0
-write_value "/proc/sys/net/ipv4/tcp_no_metrics_save" 1
 write_value "/proc/sys/net/ipv4/tcp_low_latency" 1
 write_value "/proc/sys/net/ipv4/tcp_timestamps" 0
 write_value "/proc/sys/net/ipv4/tcp_slow_start_after_idle" 0
+#
+write_value "/proc/sys/net/ipv4/tcp_no_metrics_save" 1
+write_value "/proc/sys/net/ipv4/tcp_tw_reuse" 1
 write_value "/proc/sys/net/ipv4/tcp_window_scaling" 1
 write_value "/proc/sys/net/ipv4/tcp_congestion_control" bbr
 # Disable watchdog
