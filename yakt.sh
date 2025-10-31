@@ -1,6 +1,6 @@
 #!/system/bin/sh
 
-# YAKT v304
+# YAKT v305
 # Author: @NotZeetaa (Github)
 # ×××××××××××××××××××××××××× #
 
@@ -79,7 +79,7 @@ ANDROID_VERSION=$(getprop ro.build.version.release)
 TOTAL_RAM=$(free -m | awk '/Mem/{print $2}')
 
 # Log starting information
-log_info "Starting YAKT v304"
+log_info "Starting YAKT v305"
 log_info "Build Date: 06/06/2024"
 log_info "Author: @NotZeetaa (Github)"
 log_info "Device: $(getprop ro.product.system.model)"
@@ -225,7 +225,9 @@ write_value "/proc/sys/kernel/numa_balancing" 0
 write_value "/sys/kernel/mm/ksm/run" 0
 write_value "/sys/kernel/mm/transparent_hugepage/enabled" never
 
-write_value "/proc/sys/vm/swappiness" 10
+#write_value "/proc/sys/vm/swappiness" 10
+write_value "/proc/sys/vm/swappiness" 100
+
 #for zram_dev in zram0 zram1 zram
 #do
 #  write_value "/sys/block/$zram_dev/comp_algorithm" lz4
@@ -264,6 +266,8 @@ write_value "/proc/sys/net/ipv4/tcp_slow_start_after_idle" 0
 #write_value "/proc/sys/net/ipv4/tcp_no_metrics_save" 1
 #write_value "/proc/sys/net/ipv4/tcp_tw_reuse" 1
 #
+swapoff /swapfile
+# Placed last for checking in FKM
 write_value "/proc/sys/vm/dirty_background_ratio" 5
 write_value "/proc/sys/vm/dirty_ratio" 10
 write_value "/proc/sys/vm/dirty_expire_centisecs" 500
